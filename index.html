@@ -2,7 +2,12 @@
 <html>
 <head>
   <title>Be My Valentine?</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2&family=Chewy&family=Pacifico&display=swap" rel="stylesheet">
+
   <style>
+    /* BODY STYLING */
     body {
       margin: 0;
       height: 100vh;
@@ -10,24 +15,29 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      font-family: 'Comic Sans MS', cursive;
-      background: linear-gradient(135deg, #ffd6e8, #ffeef7);
+      font-family: 'Baloo 2', cursive;
+      background: linear-gradient(135deg, #ffe6f0, #fff0f7);
       overflow: hidden;
       text-align: center;
     }
 
+    /* HEADING */
     h1 {
-      font-size: 40px;
+      font-family: 'Chewy', cursive;
+      font-size: 45px;
       color: #ff4d88;
       margin-bottom: 10px;
     }
 
-    img {
+    /* CAT IMAGE */
+    #cuteCat {
       width: 220px;
       margin-bottom: 20px;
       transition: transform 0.3s ease;
+      border-radius: 15px;
     }
 
+    /* BUTTONS */
     button {
       padding: 15px 30px;
       font-size: 20px;
@@ -36,6 +46,7 @@
       border-radius: 20px;
       border: none;
       transition: all 0.3s ease;
+      font-family: 'Pacifico', cursive;
     }
 
     #yesBtn {
@@ -48,7 +59,7 @@
       color: white;
     }
 
-    /* Floating hearts */
+    /* FLOATING HEARTS */
     .heart {
       position: absolute;
       font-size: 20px;
@@ -71,6 +82,7 @@
 
 <body>
 
+  <!-- CAT IMAGE -->
   <img 
     src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" 
     alt="Cute Cat"
@@ -91,7 +103,7 @@
     const noBtn = document.getElementById("noBtn");
     const cat = document.getElementById("cuteCat");
 
-    // Make hearts float randomly
+    // CREATE FLOATING HEARTS
     function createHeart() {
       const heart = document.createElement("div");
       heart.classList.add("heart");
@@ -107,26 +119,25 @@
 
     setInterval(createHeart, 500);
 
-    // When No is clicked
+    // NO BUTTON CLICK (Yes grows, cat wiggles)
     noBtn.addEventListener("click", function() {
       yesSize += 8;
       yesBtn.style.fontSize = yesSize + "px";
       yesBtn.style.padding = yesSize / 1.5 + "px";
-      cat.style.transform = "scale(1.1)";
+      cat.style.transform = "scale(1.1) rotate(-3deg)";
+      setTimeout(() => { cat.style.transform = "scale(1) rotate(0deg)"; }, 300);
     });
 
-    // When Yes is clicked
+    // YES BUTTON CLICK (Success screen)
     yesBtn.addEventListener("click", function() {
       document.body.innerHTML = `
-        <h1 style="font-size:50px;color:#ff4d88;">
-          hehe 💖 I Love you, Lovee!
+        <h1 style="font-family:'Chewy', cursive;font-size:50px;color:#ff4d88;">
+          Hehe 😭💖 I Love you, Loveee!!!
         </h1>
-        <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" width="300">
+        <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" width="300" style="border-radius:15px;">
       `;
     });
   </script>
 
 </body>
 </html>
-
-
