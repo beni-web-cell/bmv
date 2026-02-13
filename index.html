@@ -1,69 +1,130 @@
+<!DOCTYPE html>
 <html>
 <head>
   <title>Be My Valentine?</title>
   <style>
     body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: 'Comic Sans MS', cursive;
+      background: linear-gradient(135deg, #ffd6e8, #ffeef7);
+      overflow: hidden;
       text-align: center;
-      font-family: Arial, sans-serif;
-      margin-top: 100px;
-      background-color: #ffe6f0;
     }
-<img 
-  src="https://i.imgur.com/8Km9tLL.png" 
-  alt="Cute eyes"
-  id="pussImage"
-/>
 
     h1 {
       font-size: 40px;
+      color: #ff4d88;
+      margin-bottom: 10px;
+    }
+
+    img {
+      width: 220px;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
     }
 
     button {
       padding: 15px 30px;
       font-size: 20px;
-      margin: 20px;
+      margin: 15px;
       cursor: pointer;
-      border-radius: 10px;
+      border-radius: 20px;
       border: none;
-      transition: 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     #yesBtn {
-      background-color: #ff4d88;
+      background-color: #ff66a3;
       color: white;
     }
 
     #noBtn {
-      background-color: #999;
+      background-color: #cccccc;
       color: white;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(100vh);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-10vh);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 
 <body>
 
+  <img 
+    src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" 
+    alt="Cute Cat"
+    id="cuteCat"
+  >
+
   <h1>Will you be my Valentine? 💖</h1>
 
-  <button id="yesBtn">Yes 💕</button>
-  <button id="noBtn">No 😢</button>
+  <div>
+    <button id="yesBtn">Yes 💕</button>
+    <button id="noBtn">No 😢</button>
+  </div>
 
   <script>
-    let yesSize = 20; // starting font size
+    let yesSize = 20;
 
     const yesBtn = document.getElementById("yesBtn");
     const noBtn = document.getElementById("noBtn");
+    const cat = document.getElementById("cuteCat");
 
+    // Make hearts float randomly
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    setInterval(createHeart, 500);
+
+    // When No is clicked
     noBtn.addEventListener("click", function() {
-      yesSize += 10; // increase size
+      yesSize += 8;
       yesBtn.style.fontSize = yesSize + "px";
-      yesBtn.style.padding = (yesSize) + "px";
+      yesBtn.style.padding = yesSize / 1.5 + "px";
+      cat.style.transform = "scale(1.1)";
     });
 
+    // When Yes is clicked
     yesBtn.addEventListener("click", function() {
-      document.body.innerHTML = "<h1>YAYYY 💖 I knew it!!!</h1>";
+      document.body.innerHTML = `
+        <h1 style="font-size:50px;color:#ff4d88;">
+          YAYYYY 😭💖 BEST DAY EVER!!!
+        </h1>
+        <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" width="300">
+      `;
     });
   </script>
 
 </body>
-
 </html>
