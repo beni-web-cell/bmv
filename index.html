@@ -99,4 +99,46 @@
     const noBtn = document.getElementById("noBtn");
     const cat = document.getElementById("cuteCat");
 
-    //
+    // CREATE FLOATING HEARTS
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
+      document.body.appendChild(heart);
+      setTimeout(() => { heart.remove(); }, 6000);
+    }
+
+    setInterval(createHeart, 500);
+
+    // YES BUTTON CLICK (Success)
+    yesBtn.addEventListener("click", function() {
+      document.body.innerHTML = `
+        <h1 style="font-family:'Chewy', cursive;font-size:50px;color:#ff4d88;">
+          hehe 😭💖 I love you, Loveee!!!
+        </h1>
+        <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" width="300" style="border-radius:15px;">
+      `;
+    });
+
+    // NO BUTTON HOVER (Moves randomly)
+    noBtn.addEventListener("mouseover", function() {
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+
+      // Also grow Yes button a little for fun
+      yesSize += 5;
+      yesBtn.style.fontSize = yesSize + "px";
+      yesBtn.style.padding = yesSize / 1.5 + "px";
+
+      // Cat wiggle for extra cuteness
+      cat.style.transform = "scale(1.1) rotate(-3deg)";
+      setTimeout(() => { cat.style.transform = "scale(1) rotate(0deg)"; }, 300);
+    });
+  </script>
+
+</body>
+</html>
